@@ -3,7 +3,7 @@
 //Shane...
 //Niall...
 
-package RMIServer;
+package Server;
 
 import java.util.Date;
 import java.util.List;

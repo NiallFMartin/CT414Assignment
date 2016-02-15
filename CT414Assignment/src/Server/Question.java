@@ -1,6 +1,6 @@
 // Question.java
 
-package RMIServer;
+package Server;
 
 import java.io.Serializable;
 
