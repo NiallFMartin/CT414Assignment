@@ -14,5 +14,11 @@ public interface Question extends Serializable {
 
 	// Return the possible answers to select from
 	public String[] getAnswerOptions();
+	
+	// Returns the correct answer to the question.
+	public int getCorrectAnswer();
+	
+	// Returns the student's answer to the question.
+	public int getStudentAnswer();
 
 }
