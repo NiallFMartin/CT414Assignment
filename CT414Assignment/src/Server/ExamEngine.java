@@ -34,8 +34,7 @@ public class ExamEngine implements ExamServer {
     			studIDCheck = 1;
     		}
     	}
-    	
-    	for (int i = 0; i < password.length(); i++ ){
+    	for (int i = 0; i < passwords.length; i++ ){
     		if (passwords[i].equals(password)){
     			passwordCheck = 1;
     		}
@@ -43,11 +42,12 @@ public class ExamEngine implements ExamServer {
     	
     	if ((studIDCheck == 1) && (passwordCheck == 1)){
     		System.out.println("User is now logged in...");
+    		return 1;// Successful login.
     	} else {
     		System.out.println("Incorrect user login...");
+    		return 0; //Incorrect login.
     	}
-
-	return studIDCheck;	
+	
     }
 
     // Return a summary list of Assessments currently available for this studentid
