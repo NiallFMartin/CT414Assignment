@@ -24,8 +24,16 @@ public class ExamEngine implements ExamServer {
 
 	// TBD: You need to implement this method!
 	// For the moment method just returns an empty or null value to allow it to compile
+    	int check = 0;
+    	
+    	if ((studentid == 123) && (password.equals("abc"))){
+    		System.out.println("You are now logged in!");
+    		check = 1;
+    	} else {
+    		System.out.println("Wrong login. Try again.");
+    	}
 
-	return 0;	
+	return check;	
     }
 
     // Return a summary list of Assessments currently available for this studentid
