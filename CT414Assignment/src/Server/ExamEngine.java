@@ -5,21 +5,67 @@ import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.List;
 import Server.NoMatchingAssessment;
 import Server.UnauthorizedAccess;
 import Server.Assessment;
+import java.util.*;
 
 public class ExamEngine implements ExamServer {
 
 	private int [] studentIDs = {123, 456, 789, 012};
 	private String [] passwords = {"abc", "def", "ghi", "jkl"};
 	
+	public List<Assessment> assessments;
+	
     // Constructor is required
     public ExamEngine() {
         super();
     }
 
+    //Create assessment and question objects
+    public void createObjects() throws ParseException
+    {
+    	//Create questions
+    	List<Question> qList1 = null;
+    	String[] mountains = {"1: Everest", "2: K2", "3: Mount Blanc"};
+    	Question q1 = new QuestionImplementation(1, "What is the tallest mountain?", mountains , 1, 0);
+    	Question q2 = new QuestionImplementation(1, "What is the smallest mountain?", mountains , 3, 0);
+    	qList1.add(q1);
+    	qList1.add(q2);
+    	
+    	List<Question> qList2 = null;
+    	String[] rivers = {"1: Nile", "2: Amazon", "3: Shannon"};
+    	Question q3 = new QuestionImplementation(1, "What is the longest river?", rivers , 1, 0);
+    	Question q4 = new QuestionImplementation(1, "What is the shortest river?", rivers , 3, 0);
+    	qList2.add(q3);
+    	qList2.add(q4);
+    	
+    	List<Question> qList3 = null;
+    	String[] countries = {"1: Russia", "2: Germany", "3: Ireland"};
+    	Question q5 = new QuestionImplementation(1, "What is the largest country?", countries , 1, 0);
+    	Question q6 = new QuestionImplementation(1, "What is the smallest country?", countries , 3, 0);
+    	qList3.add(q5);
+    	qList3.add(q6);
+    	
+    	//create dates
+    	SimpleDateFormat fmt = new SimpleDateFormat("dd-mm-yyyy");    	
+    	Date d1 = fmt.parse("10/03/2016");
+    	Date d2 = fmt.parse("20/02/2016");
+    	Date d3 = fmt.parse("25/02/2016");
+    	
+    	//create assessments		
+    	Assessment assessment1 = new AssessmentImplementation("CT414",d1 , qList1, 123, false);
+    	Assessment assessment2 = new AssessmentImplementation("CT450",d2 , qList2, 456, false);
+    	Assessment assessment3 = new AssessmentImplementation("CT425",d3 , qList3, 789, false);
+    	
+    	assessments.add(assessment1);
+    	assessments.add(assessment2);
+    	assessments.add(assessment3);
+    }
+    
     // Implement the methods defined in the ExamServer interface...
     // Return an access token that allows access to the server for some time period
     public int login(int studentid, String password) throws 

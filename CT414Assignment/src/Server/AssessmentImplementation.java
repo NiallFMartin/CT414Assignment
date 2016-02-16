@@ -12,14 +12,16 @@ public class AssessmentImplementation implements Assessment {
 	private int questionNumber;
 	private int selectedAnswer;
 	private int studentId;
+	private boolean completionStatus;
 	
 	//constructor
-	public AssessmentImplementation(String courseInfo,Date closingDate, List<Question> questionList, int studentId)
+	public AssessmentImplementation(String courseInfo,Date closingDate, List<Question> questionList, int studentId, boolean completionStatus)
 	{
 		courseInfo = this.courseInfo;
 		closingDate = this.closingDate;
 		questionList = this.questionList;
 		studentId = this.studentId;
+		completionStatus = this.completionStatus;
 	}
 	
 	public String getInformation() {
