@@ -18,16 +18,16 @@ public class AssessmentImplementation implements Assessment {
 	//constructor
 	public AssessmentImplementation(int courseCode, String assessmentInfo,Date closingDate, List<Question> questionList, int studentId, boolean completionStatus)
 	{
-		courseCode = this.courseCode;
-		assessmentInfo = this.assessmentInfo;
-		closingDate = this.closingDate;
-		questionList = this.questionList;
-		studentId = this.studentId;
-		completionStatus = this.completionStatus;
+		this.courseCode = courseCode;
+		this.assessmentInfo = assessmentInfo;
+		this.closingDate = closingDate;
+		this.questionList = questionList;
+		this.studentId = studentId;
+		this.completionStatus = completionStatus;
 	}
 	
 	public int getCourseCode(){
-		return this.courseCode;
+		return courseCode;
 	}
 	
 	public String getInformation() {

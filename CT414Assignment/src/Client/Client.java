@@ -5,9 +5,11 @@ import java.rmi.RMISecurityManager;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import Server.Assessment;
 import Server.ExamServer;
 
 public class Client {
@@ -15,15 +17,34 @@ public class Client {
 	private static String name = "ExamServer"; 
 	private static int num = 0;
 	private static int token = 0;
+//	private static List<Assessment> assess
+	private ExamServer server;
 	
+	//constructor
+	public Client(ExamServer server)
+	{
+		this.server = server;
+		this.signin();
+	}
 	
 	public static void main (String [] args){		
 		if (System.getSecurityManager() == null){
 			System.setSecurityManager(new RMISecurityManager());
 		}
 
-		while (num == 0){
-			signin();
+		String name = "ExamServer";
+		Registry registry;
+		
+		try{
+			registry = LocateRegistry.getRegistry();
+			
+			ExamServer server = (ExamServer)registry.lookup(name);
+			
+			new Client(server);
+		}
+		catch(Exception e) {
+			System.err.println("Exception in ExamServer");
+			e.printStackTrace();
 		}
 	}
 	
@@ -53,9 +74,10 @@ public class Client {
 		}
 	}
 	
-	private static void signin(){
+	private void signin(){
 		try {
-			ExamServer client = (ExamServer) Naming.lookup(name);
+			
+			List<Assessment> assess = new ArrayList<Assessment>();
 
 			Scanner scanner = new Scanner(System.in);
 			System.out.print("Enter your User ID(123): ");
@@ -64,14 +86,17 @@ public class Client {
 			String password = scanner.next();
 			
 			System.out.println("Attempting to login...");
-			if (client.login(studentID, password) == 1){
+			if (this.server.login(studentID, password) == 1){
 				token = 1;
 				System.out.println("\nYou are now logged in :)");
 //				mainMenu();
 				System.out.println("Here is the list of course that are available to you: \n");
-				List<String> summs = client.getAvailableSummary(token, studentID);
+				assess = this.server.createObjects();
+
+				for (Assessment a : assess){
+					System.out.println("Course Code: "+a.getInformation());
+				}
 				
-				System.out.println(summs.size());
 			} 
 			else {
 				System.out.println("\nWrong login :(");
