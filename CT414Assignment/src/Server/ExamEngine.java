@@ -27,10 +27,10 @@ public class ExamEngine implements ExamServer {
     	int check = 0;
     	
     	if ((studentid == 123) && (password.equals("abc"))){
-    		System.out.println("User is now logged in!");
+    		System.out.println("User is now logged in...");
     		check = 1;
     	} else {
-    		System.out.println("Wrong login. Try again.");
+    		System.out.println("Incorrect user login...");
     	}
 
 	return check;	
@@ -79,5 +79,7 @@ public class ExamEngine implements ExamServer {
             System.err.println("ExamEngine exception:");
             e.printStackTrace();
         }
+        
+//        Assessment a = new Assessment();
     }
 }

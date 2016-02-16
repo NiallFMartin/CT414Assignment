@@ -20,10 +20,10 @@ public class Client {
 //			Registry registry = LocateRegistry.getRegistry(args[0]);
 			ExamServer client = (ExamServer) Naming.lookup(name);
 			System.out.println("Attempting to login...");
-			if (client.login(123, "abc") == 1){
+			if (client.login(12, "abc") == 1){
 				System.out.println("\nYou are now logged in :)");
 			} else {
-				System.out.println("Wrong login :(");
+				System.out.println("\nWrong login :(");
 			}
 			
 		} catch (Exception e) {
