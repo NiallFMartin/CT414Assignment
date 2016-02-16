@@ -59,8 +59,8 @@ public class ExamEngine implements ExamServer {
     	
     	//create assessments		
     	Assessment assessment1 = new AssessmentImplementation(1, "CT414 - Mountains Assignment",d1 , qList1, 123, false);
-    	Assessment assessment2 = new AssessmentImplementation(2, "CT450 - ",d2 , qList2, 456, false);
-    	Assessment assessment3 = new AssessmentImplementation(3, "CT425",d3 , qList3, 789, false);
+    	Assessment assessment2 = new AssessmentImplementation(2, "CT450 - Rivers Assignment",d2 , qList2, 456, false);
+    	Assessment assessment3 = new AssessmentImplementation(3, "CT425 - Countries Assignment",d3 , qList3, 789, false);
     	
     	assessments.add(assessment1);
     	assessments.add(assessment2);
