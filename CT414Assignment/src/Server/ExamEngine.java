@@ -19,7 +19,7 @@ public class ExamEngine implements ExamServer {
 	private String [] passwords = {"abc", "def", "ghi", "jkl"};
 	private int token = 0;
 	
-//	public static List<Assessment> assessments = new ArrayList<Assessment>();
+	public List<Assessment> assessments = new ArrayList<Assessment>();
 	public List<Assessment> completedAssessments = new ArrayList<Assessment>();
 	
     // Constructor is required
@@ -30,7 +30,7 @@ public class ExamEngine implements ExamServer {
     //Create assessment and question objects
     public List<Assessment> createObjects() throws ParseException, RemoteException
     {
-    	List<Assessment> assessments = new ArrayList<Assessment>();
+//    	List<Assessment> assessments = new ArrayList<Assessment>();
     	
     	//Create questions
     	List<Question> qList1 = new ArrayList<Question>();
@@ -104,35 +104,36 @@ public class ExamEngine implements ExamServer {
     }
 
     // Return a summary list of Assessments currently available for this studentid
-//    public List<String> getAvailableSummary(int token, int studentid) throws
-//                UnauthorizedAccess, NoMatchingAssessment, RemoteException {
-//
-//    	List<String> summaries = null;
-//    	
-//    	if (token == 1){
-//    		for (Assessment a : assessments){
-//    			if (a.getStudentID() == studentid){
-//    				summaries.add(a.getInformation());
-//    			}
-//    		}
-//    		return summaries;
-//    	}
-//        return null;
-//    }
-//
-//    // Return an Assessment object associated with a particular course code
-//    public Assessment getAssessment(int token, int studentid, int courseCode) throws
-//                UnauthorizedAccess, NoMatchingAssessment, RemoteException {
-//
-//    	if (token == 1){
-//    		for (Assessment a : assessments){
-//    			if ((a.getStudentID() == studentid) && (a.getCourseCode() == courseCode)){
-//    				return a;
-//    			}
-//    		}
-//    	}
-//        return null;
-//    }
+    public List<String> getAvailableSummary(int token, int studentid) throws
+                UnauthorizedAccess, NoMatchingAssessment, RemoteException {
+
+    	List<String> summaries = new ArrayList<String>();
+    	
+    	if (token == 1){
+    		for (Assessment a : assessments){
+    			if (a.getStudentID() == studentid){
+    				summaries.add(a.getInformation());
+    			}
+    		}
+    		return summaries;
+    	} else {
+    		return null;
+    	}
+    }
+
+    // Return an Assessment object associated with a particular course code
+    public Assessment getAssessment(int token, int studentid, int courseCode) throws
+                UnauthorizedAccess, NoMatchingAssessment, RemoteException {
+
+    	if (token == 1){
+    		for (Assessment a : assessments){
+    			if ((a.getStudentID() == studentid) && (a.getCourseCode() == courseCode)){
+    				return a;
+    			}
+    		}
+    	}
+        return null;
+    }
 //
 //    // Submit a completed assessment
 //    public void submitAssessment(int token, int studentid, Assessment completed) throws 

@@ -11,6 +11,8 @@ import java.util.Scanner;
 
 import Server.Assessment;
 import Server.ExamServer;
+import Server.NoMatchingAssessment;
+import Server.UnauthorizedAccess;
 
 public class Client {
 
@@ -48,7 +50,7 @@ public class Client {
 		}
 	}
 	
-	private static void mainMenu()
+	private void mainMenu(int studentID) throws RemoteException, UnauthorizedAccess, NoMatchingAssessment
 	{
 		System.out.println("\nPlease choose an action: \n1 - View your assessments summary\n2 - Complete an assessment\n3 - Exit System");
 		System.out.print("Choice: ");
@@ -57,11 +59,11 @@ public class Client {
 		
 		if(choice == 1)
 		{
-			summary();
+			this.summary(studentID);
 		}
 		else if (choice == 2)
 		{
-			completeAssessment();
+			completeAssessment(studentID);
 		}
 		else if(choice == 3)
 		{
@@ -70,7 +72,7 @@ public class Client {
 		else
 		{
 			System.out.println("Invalid input, try again.");
-			mainMenu();
+			mainMenu(studentID);
 		}
 	}
 	
@@ -89,13 +91,13 @@ public class Client {
 			if (this.server.login(studentID, password) == 1){
 				token = 1;
 				System.out.println("\nYou are now logged in :)");
-//				mainMenu();
-				System.out.println("Here is the list of course that are available to you: \n");
-				assess = this.server.createObjects();
-
-				for (Assessment a : assess){
-					System.out.println("Course Code: "+a.getInformation());
-				}
+//				System.out.println("Here is the list of course that are available to you: \n");
+				this.server.createObjects();
+//
+//				for (Assessment a : assess){
+//					System.out.println("Course Code: "+a.getInformation());
+//				}
+				mainMenu(studentID);
 				
 			} 
 			else {
@@ -112,19 +114,24 @@ public class Client {
 		}
 	}
 	
-	public static void summary()
+	public void summary(int studentID) throws RemoteException, UnauthorizedAccess, NoMatchingAssessment
 	{
+		List<String> summaries = new ArrayList<String>();
 		System.out.println("\nSummary test\n");
 		System.out.println("Here is the list of course that are available to you: \n");
+		summaries = this.server.getAvailableSummary(1, studentID);
 		
+		for (String s : summaries){
+			System.out.println("CC: "+s);
+		}
 		
-		mainMenu();
+		mainMenu(studentID);
 	}
 	
-	public static void completeAssessment()
+	public void completeAssessment(int studentID) throws RemoteException, UnauthorizedAccess, NoMatchingAssessment
 	{
 		System.out.println("\ncomplete assessment test\n");
 		
-		mainMenu();
+		mainMenu(studentID);
 	}
 }

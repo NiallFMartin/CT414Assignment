@@ -1,6 +1,6 @@
 package Server;
 
-public class QuestionImplementation implements Question{
+public class QuestionImplementation implements Question {
 
 	private int qNum; //Question Number
 	private String qDetail; //Question Detail
@@ -9,11 +9,11 @@ public class QuestionImplementation implements Question{
 	private int studentAns; //Question Student Answer
 	
 	public QuestionImplementation(int qNum, String qDetail, String [] qAnsOptions, int correctAns, int studentAns){
-		qNum = this.qNum;
-		qDetail = this.qDetail;
-		qAnsOptions = this.qAnsOptions;//0 = Yes, 1 = No, 2 = None.
-		correctAns = this.correctAns;
-		studentAns = this.studentAns;
+		this.qNum = qNum;
+		this.qDetail = qDetail;
+		this.qAnsOptions = qAnsOptions;//0 = Yes, 1 = No, 2 = None.
+		this.correctAns = correctAns;
+		this.studentAns = studentAns;
 	}
 	
 	public int getQuestionNumber() {

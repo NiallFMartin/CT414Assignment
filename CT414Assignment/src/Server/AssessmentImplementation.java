@@ -27,7 +27,7 @@ public class AssessmentImplementation implements Assessment {
 	}
 	
 	public int getCourseCode(){
-		return courseCode;
+		return this.courseCode;
 	}
 	
 	public String getInformation() {
