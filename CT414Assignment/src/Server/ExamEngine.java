@@ -94,7 +94,7 @@ public class ExamEngine implements ExamServer {
             e.printStackTrace();
         }
         
-        Assessment assessment = new AssessmentImplementation();
+//        Assessment assessment = new AssessmentImplementation();
         
         
     }
