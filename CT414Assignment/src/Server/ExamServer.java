@@ -10,6 +10,8 @@ import Server.UnauthorizedAccess;
 
 public interface ExamServer extends Remote {
 
+//	public void createObjects() throws ParseException;
+	
 	// Return an access token that allows access to the server for some time period
 	public int login(int studentid, String password) throws 
 		UnauthorizedAccess, RemoteException;
@@ -19,7 +21,7 @@ public interface ExamServer extends Remote {
 		UnauthorizedAccess, NoMatchingAssessment, RemoteException;
 
 	// Return an Assessment object associated with a particular course code
-	public Assessment getAssessment(int token, int studentid, String courseCode) throws
+	public Assessment getAssessment(int token, int studentid, int courseCode) throws
 		UnauthorizedAccess, NoMatchingAssessment, RemoteException;
 
 	// Submit a completed assessment

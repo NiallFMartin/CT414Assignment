@@ -11,6 +11,8 @@ import java.io.Serializable;
 
 public interface Assessment extends Serializable {
 
+	public int getCourseCode();
+	
 	// Return information about the assessment	
 	public String getInformation();
 
@@ -33,7 +35,7 @@ public interface Assessment extends Serializable {
 
 	// Return studentid associated with this assessment object
 	// This will be preset on the server before object is downloaded
-	public int getAssociatedID();
+	public int getStudentID();//Changed from getAssociatedID to StudentID.
 
 }
 

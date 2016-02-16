@@ -17,6 +17,7 @@ public class ExamEngine implements ExamServer {
 
 	private int [] studentIDs = {123, 456, 789, 012};
 	private String [] passwords = {"abc", "def", "ghi", "jkl"};
+	private int token = 0;
 	
 	public List<Assessment> assessments;
 	
@@ -57,9 +58,9 @@ public class ExamEngine implements ExamServer {
     	Date d3 = fmt.parse("25/02/2016");
     	
     	//create assessments		
-    	Assessment assessment1 = new AssessmentImplementation("CT414",d1 , qList1, 123, false);
-    	Assessment assessment2 = new AssessmentImplementation("CT450",d2 , qList2, 456, false);
-    	Assessment assessment3 = new AssessmentImplementation("CT425",d3 , qList3, 789, false);
+    	Assessment assessment1 = new AssessmentImplementation(1, "CT414 - Mountains Assignment",d1 , qList1, 123, false);
+    	Assessment assessment2 = new AssessmentImplementation(2, "CT450 - ",d2 , qList2, 456, false);
+    	Assessment assessment3 = new AssessmentImplementation(3, "CT425",d3 , qList3, 789, false);
     	
     	assessments.add(assessment1);
     	assessments.add(assessment2);
@@ -88,6 +89,7 @@ public class ExamEngine implements ExamServer {
     	
     	if ((studIDCheck == 1) && (passwordCheck == 1)){
     		System.out.println("User is now logged in...");
+    		token = 1;
     		return 1;// Successful login.
     	} else {
     		System.out.println("Incorrect user login...");
@@ -100,18 +102,30 @@ public class ExamEngine implements ExamServer {
     public List<String> getAvailableSummary(int token, int studentid) throws
                 UnauthorizedAccess, NoMatchingAssessment, RemoteException {
 
-        // TBD: You need to implement this method!
-        // For the moment method just returns an empty or null value to allow it to compile
-
+    	List<String> summaries = null;
+    	
+    	if (token == 1){
+    		for (Assessment a : assessments){
+    			if (a.getStudentID() == studentid){
+    				summaries.add(a.getInformation());
+    			}
+    		}
+    		return summaries;
+    	}
         return null;
     }
 
     // Return an Assessment object associated with a particular course code
-    public Assessment getAssessment(int token, int studentid, String courseCode) throws
+    public Assessment getAssessment(int token, int studentid, int courseCode) throws
                 UnauthorizedAccess, NoMatchingAssessment, RemoteException {
 
-        // TBD: You need to implement this method!
-        // For the moment method just returns an empty or null value to allow it to compile
+    	if (token == 1){
+    		for (Assessment a : assessments){
+    			if ((a.getStudentID() == studentid) && (a.getCourseCode() == courseCode)){
+    				return a;
+    			}
+    		}
+    	}
 
         return null;
     }
