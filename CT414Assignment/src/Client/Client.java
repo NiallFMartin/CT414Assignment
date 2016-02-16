@@ -25,21 +25,48 @@ public class Client {
 		}
 	}
 	
+	private static void mainMenu()
+	{
+		System.out.println("\nPlease choose an action: \n1 - View your assessments summary\n2 - Complete an assessment\n3 - Exit System");
+		System.out.print("Choice: ");
+		Scanner scanner = new Scanner(System.in);
+		int choice = scanner.nextInt();
+		
+		if(choice == 1)
+		{
+			summary();
+		}
+		else if (choice == 2)
+		{
+			completeAssessment();
+		}
+		else if(choice == 3)
+		{
+			System.exit(0);
+		}
+		else
+		{
+			System.out.println("Invalid input, try again.");
+			mainMenu();
+		}
+	}
+	
 	private static void signin(){
 		try {
 			ExamServer client = (ExamServer) Naming.lookup(name);
 			
 			Scanner scanner = new Scanner(System.in);
-			System.out.println("Enter your User ID(123): ");
+			System.out.print("Enter your User ID(123): ");
 			int userID = scanner.nextInt();
-			System.out.println("Enter your password(abc): ");
+			System.out.print("Enter your password(abc): ");
 			String password = scanner.next();
 			
 			System.out.println("Attempting to login...");
 			if (client.login(userID, password) == 1){
 				System.out.println("\nYou are now logged in :)");
-				System.exit(0);
-			} else {
+				mainMenu();
+			} 
+			else {
 				System.out.println("\nWrong login :(");
 				System.out.println("Enter 0 to try again: \nOR \n1 to exit: ");
 				num = scanner.nextInt();
@@ -53,4 +80,15 @@ public class Client {
 		}
 	}
 	
+	public static void summary()
+	{
+		System.out.println("\nSummary test\n");
+		mainMenu();
+	}
+	
+	public static void completeAssessment()
+	{
+		System.out.println("\ncomplete assessment test\n");
+		mainMenu();
+	}
 }
