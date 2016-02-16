@@ -5,45 +5,58 @@ import java.util.List;
 
 public class AssessmentImplementation implements Assessment {
 
-	@Override
+	private String courseInfo;
+	private Date closingDate;
+	private List<Question> questionList;
+	private Question question;
+	private int selectedAnswer;
+	private int studentId;
+	
+	//constructor
+	public AssessmentImplementation()
+	{
+		super();
+	}
+	
 	public String getInformation() {
-		// TODO Auto-generated method stub
+		//course code and assessment name
 		return null;
 	}
 
-	@Override
+	
 	public Date getClosingDate() {
-		// TODO Auto-generated method stub
+		//assessment closing date
 		return null;
 	}
 
-	@Override
+	
 	public List<Question> getQuestions() {
-		// TODO Auto-generated method stub
+		//returns list of question objects
 		return null;
 	}
 
-	@Override
+	
 	public Question getQuestion(int questionNumber) throws InvalidQuestionNumber {
-		// TODO Auto-generated method stub
+		//get specific question using question numbers
 		return null;
 	}
 
-	@Override
+	
 	public void selectAnswer(int questionNumber, int optionNumber) throws InvalidQuestionNumber, InvalidOptionNumber {
-		// TODO Auto-generated method stub
+
+		//select answer of question
 		
 	}
 
-	@Override
+	
 	public int getSelectedAnswer(int questionNumber) {
-		// TODO Auto-generated method stub
+		//return answer selected by student
 		return 0;
 	}
 
-	@Override
+	
 	public int getAssociatedID() {
-		// TODO Auto-generated method stub
+		//get student id
 		return 0;
 	}
 
