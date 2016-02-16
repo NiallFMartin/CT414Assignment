@@ -19,7 +19,8 @@ public class ExamEngine implements ExamServer {
 	private String [] passwords = {"abc", "def", "ghi", "jkl"};
 	private int token = 0;
 	
-	public List<Assessment> assessments;
+	public static List<Assessment> assessments = new ArrayList<Assessment>();
+	public List<Assessment> completedAssessments = new ArrayList<Assessment>();
 	
     // Constructor is required
     public ExamEngine() {
@@ -27,24 +28,24 @@ public class ExamEngine implements ExamServer {
     }
 
     //Create assessment and question objects
-    public void createObjects() throws ParseException
+    public static void createObjects() throws ParseException
     {
     	//Create questions
-    	List<Question> qList1 = null;
+    	List<Question> qList1 = new ArrayList<Question>();
     	String[] mountains = {"1: Everest", "2: K2", "3: Mount Blanc"};
     	Question q1 = new QuestionImplementation(1, "What is the tallest mountain?", mountains , 1, 0);
     	Question q2 = new QuestionImplementation(1, "What is the smallest mountain?", mountains , 3, 0);
     	qList1.add(q1);
     	qList1.add(q2);
     	
-    	List<Question> qList2 = null;
+    	List<Question> qList2 = new ArrayList<Question>();
     	String[] rivers = {"1: Nile", "2: Amazon", "3: Shannon"};
     	Question q3 = new QuestionImplementation(1, "What is the longest river?", rivers , 1, 0);
     	Question q4 = new QuestionImplementation(1, "What is the shortest river?", rivers , 3, 0);
     	qList2.add(q3);
     	qList2.add(q4);
     	
-    	List<Question> qList3 = null;
+    	List<Question> qList3 = new ArrayList<Question>();
     	String[] countries = {"1: Russia", "2: Germany", "3: Ireland"};
     	Question q5 = new QuestionImplementation(1, "What is the largest country?", countries , 1, 0);
     	Question q6 = new QuestionImplementation(1, "What is the smallest country?", countries , 3, 0);
@@ -52,7 +53,7 @@ public class ExamEngine implements ExamServer {
     	qList3.add(q6);
     	
     	//create dates
-    	SimpleDateFormat fmt = new SimpleDateFormat("dd-mm-yyyy");    	
+    	SimpleDateFormat fmt = new SimpleDateFormat("dd/mm/yyyy");    	
     	Date d1 = fmt.parse("10/03/2016");
     	Date d2 = fmt.parse("20/02/2016");
     	Date d3 = fmt.parse("25/02/2016");
@@ -126,15 +127,23 @@ public class ExamEngine implements ExamServer {
     			}
     		}
     	}
-
         return null;
     }
 
     // Submit a completed assessment
     public void submitAssessment(int token, int studentid, Assessment completed) throws 
                 UnauthorizedAccess, NoMatchingAssessment, RemoteException {
-
-        // TBD: You need to implement this method!
+    		
+    	if (token == 1) {
+    		for (Assessment a : completedAssessments) {
+    			if ((a.getCourseCode() == completed.getCourseCode()) && (a.getStudentID() == completed.getStudentID())){
+    				a = completed;
+    			} else {
+    				completedAssessments.add(completed);
+    			}
+    		}
+    	}
+    
     }
 
     public static void main(String[] args) {
@@ -149,6 +158,11 @@ public class ExamEngine implements ExamServer {
             Registry registry = LocateRegistry.getRegistry();
             registry.rebind(name, stub);
             System.out.println("ExamEngine Started...");
+            createObjects();
+            for(Assessment a : assessments)
+            {
+                registry.rebind("assessment" + a.getCourseCode(), stub);
+            }
         } catch (Exception e) {
             System.err.println("ExamEngine exception:");
             e.printStackTrace();

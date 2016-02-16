@@ -35,18 +35,15 @@ public class AssessmentImplementation implements Assessment {
 		return this.assessmentInfo;
 	}
 
-	
 	public Date getClosingDate() {
 		//assessment closing date
 		return this.closingDate;
 	}
-
 	
 	public List<Question> getQuestions() {
 		//returns list of question objects
 		return this.questionList;
 	}
-
 	
 	public Question getQuestion(int questionNumber) throws InvalidQuestionNumber {
 		//get specific question using question numbers
@@ -63,7 +60,6 @@ public class AssessmentImplementation implements Assessment {
 		}
 		return null;
 	}
-
 	
 	public void selectAnswer(int questionNumber, int optionNumber) throws InvalidQuestionNumber, InvalidOptionNumber {
 
@@ -78,7 +74,6 @@ public class AssessmentImplementation implements Assessment {
 		    }
 		}
 	}
-
 	
 	public int getSelectedAnswer(int questionNumber) {
 		//return answer selected by student
@@ -93,11 +88,18 @@ public class AssessmentImplementation implements Assessment {
 		}
 		return 0;
 	}
-
 	
 	public int getStudentID() { //Changed from getAssociatedID to StudentID.	
 		//get student id
 		return this.studentId;
+	}
+	
+	public boolean getCompletionStatus(){
+		return this.completionStatus;
+	}
+	
+	public void setCompletionStatus(boolean completionStatus){
+		this.completionStatus = completionStatus;
 	}
 
 }
