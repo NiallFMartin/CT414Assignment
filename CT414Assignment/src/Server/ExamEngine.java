@@ -27,7 +27,7 @@ public class ExamEngine implements ExamServer {
     	int check = 0;
     	
     	if ((studentid == 123) && (password.equals("abc"))){
-    		System.out.println("You are now logged in!");
+    		System.out.println("User is now logged in!");
     		check = 1;
     	} else {
     		System.out.println("Wrong login. Try again.");
@@ -74,7 +74,7 @@ public class ExamEngine implements ExamServer {
                 (ExamServer) UnicastRemoteObject.exportObject(engine, 0);
             Registry registry = LocateRegistry.getRegistry();
             registry.rebind(name, stub);
-            System.out.println("ExamEngine bound");
+            System.out.println("ExamEngine Started...");
         } catch (Exception e) {
             System.err.println("ExamEngine exception:");
             e.printStackTrace();
