@@ -6,15 +6,12 @@ import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.List;
+
 import Server.NoMatchingAssessment;
 import Server.UnauthorizedAccess;
-import Server.Assessment;
 
 public class ExamEngine implements ExamServer {
 
-	private int [] studentIDs = {123, 456, 789, 012};
-	private String [] passwords = {"abc", "def", "ghi", "jkl"};
-	
     // Constructor is required
     public ExamEngine() {
         super();
@@ -27,27 +24,16 @@ public class ExamEngine implements ExamServer {
 
 	// TBD: You need to implement this method!
 	// For the moment method just returns an empty or null value to allow it to compile
-    	int studIDCheck = 0, passwordCheck = 0;
+    	int check = 0;
     	
-    	for (int i = 0; i < studentIDs.length; i++) {
-    		if (studentIDs[i] == studentid) {
-    			studIDCheck = 1;
-    		}
-    	}
-    	
-    	for (int i = 0; i < password.length(); i++ ){
-    		if (passwords[i].equals(password)){
-    			passwordCheck = 1;
-    		}
-    	}
-    	
-    	if ((studIDCheck == 1) && (passwordCheck == 1)){
-    		System.out.println("User is now logged in...");
+    	if ((studentid == 123) && (password.equals("abc"))){
+    		System.out.println("User is now logged in!");
+    		check = 1;
     	} else {
-    		System.out.println("Incorrect user login...");
+    		System.out.println("Wrong login. Try again.");
     	}
 
-	return studIDCheck;	
+	return check;	
     }
 
     // Return a summary list of Assessments currently available for this studentid
@@ -93,9 +79,5 @@ public class ExamEngine implements ExamServer {
             System.err.println("ExamEngine exception:");
             e.printStackTrace();
         }
-        
-        Assessment assessment = new AssessmentImplementation();
-        
-        
     }
 }

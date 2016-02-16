@@ -35,5 +35,9 @@ public class QuestionImplementation implements Question{
 	public int getStudentAnswer() {
 		return this.studentAns;
 	}
+	
+	public void setStudentAnswer(int answer) {
+		this.studentAns = answer;
+	}
 
 }

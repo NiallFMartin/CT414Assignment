@@ -20,5 +20,8 @@ public interface Question extends Serializable {
 	
 	// Returns the student's answer to the question.
 	public int getStudentAnswer();
+	
+	//sets what the student's answer to the question is
+	public void setStudentAnswer(int answer);
 
 }
