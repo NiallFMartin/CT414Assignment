@@ -1,4 +1,7 @@
-// ExamServer.java
+//Shane O' Rourke - 12361351
+//Niall Martin - 12301341
+
+//ExamServer.java
 
 package Server;
 
@@ -11,6 +14,7 @@ import Server.UnauthorizedAccess;
 
 public interface ExamServer extends Remote {
 
+	//Creates and returns a list of assessment and 
 	public List<Assessment> createObjects() throws ParseException, RemoteException;
 	
 	// Return an access token that allows access to the server for some time period

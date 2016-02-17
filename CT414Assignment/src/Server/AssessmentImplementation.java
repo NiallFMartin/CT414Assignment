@@ -1,3 +1,8 @@
+//Shane O' Rourke - 12361351
+//Niall Martin - 12301341
+
+//AssessmentImplementation.java
+
 package Server;
 
 import java.text.SimpleDateFormat;
@@ -17,46 +22,47 @@ public class AssessmentImplementation implements Assessment {
 	private boolean completionStatus;
 	private String dateCompleted;
 	
-	//constructor
-	public AssessmentImplementation(int assessmentCode, String assessmentInfo,Date closingDate, List<Question> questionList, int studentId, boolean completionStatus, String dateCompleted)
-	{
+	//Constructor that contains all information regarding an assessment.
+	public AssessmentImplementation(int assessmentCode, String assessmentInfo,Date closingDate, 
+			List<Question> questionList, int studentId, boolean completionStatus, String dateCompleted) {
 		this.assessmentCode = assessmentCode;
-		this.assessmentInfo = assessmentInfo;
-		this.closingDate = closingDate;
-		this.questionList = questionList;
+		this.assessmentInfo = assessmentInfo;//Name of assessment.
+		this.closingDate = closingDate;//Submission date.
+		this.questionList = questionList;//List of questions contained in the assessment.
 		this.studentId = studentId;
 		this.completionStatus = completionStatus;
-		this.dateCompleted = dateCompleted;
+		this.dateCompleted = dateCompleted;//Date assessment was last completed.
 	}
 	
+	//Return assessment code.
 	public int getAssessmentCode(){
 		return this.assessmentCode;
 	}
 	
 	public String getInformation() {
-		//course code and assessment name
-		return this.assessmentInfo + " Completed: " + this.completionStatus;
+		//Course code and assessment name.
+		return this.assessmentInfo + "\nCompleted: " + this.completionStatus;
 	}
 
 	public Date getClosingDate() {
-		//assessment closing date
+		//Assessment closing date.
 		return this.closingDate;
 	}
 	
 	public List<Question> getQuestions() {
-		//returns list of question objects
+		//Returns list of question objects.
 		return this.questionList;
 	}
 	
 	public Question getQuestion(int questionNumber) throws InvalidQuestionNumber {
-		//get specific question using question numbers
+		//Get specific question using question numbers.
 		Question q = new QuestionImplementation(0, null, null, 0, 0);
 		
+		//Iterates through the question list to find specific question.
 		for(int i = 0; i < questionList.size(); i++) {
 		    Question obj = questionList.get(i);
 		    int qNumber = obj.getQuestionNumber();
-		    if (qNumber == questionNumber)
-		    {
+		    if (qNumber == questionNumber){
 		    	q = obj;
 		    	return q;
 		    }
@@ -65,50 +71,51 @@ public class AssessmentImplementation implements Assessment {
 	}
 	
 	public void selectAnswer(int questionNumber, int optionNumber) throws InvalidQuestionNumber, InvalidOptionNumber {
-
-		//select answer of question
-		//get specific question using question number
+		//Select answer of question.
+		//Get specific question using question number.
 		for(int i = 0; i < questionList.size(); i++) {
 		    Question obj = questionList.get(i);
 		    int qNumber = obj.getQuestionNumber();
-		    if (qNumber == questionNumber)
-		    {
+		    if (qNumber == questionNumber) {
 		    	obj.setStudentAnswer(optionNumber);
 		    }
 		}
 	}
 	
 	public int getSelectedAnswer(int questionNumber) {
-		//return answer selected by student
+		//Return answer selected by student.
 
 		for(int i = 0; i < questionList.size(); i++) {
 		    Question obj = questionList.get(i);
 		    int qNumber = obj.getQuestionNumber();
-		    if (qNumber == questionNumber)
-		    {
+		    if (qNumber == questionNumber) {
 		    	return obj.getStudentAnswer();
 		    }
 		}
 		return 0;
 	}
 	
-	public int getStudentID() { //Changed from getAssociatedID to StudentID.	
-		//get student id
+	public int getStudentID() { //Changed from getAssociatedID to getStudentID.	
+		//Gets student id.
 		return this.studentId;
 	}
 	
+	//Returns true/false depending on completion.
 	public boolean getCompletionStatus(){
 		return this.completionStatus;
 	}
 	
+	//Sets assessment to true/false depending on completion.
 	public void setCompletionStatus(boolean completionStatus){
 		this.completionStatus = completionStatus;
 	}
 	
+	//Returns the date completed.
 	public String getDateCompleted(){
 		return this.dateCompleted;
 	}
 	
+	//Sets the date assessment was last completed.
 	public void setDateCompleted(){
     	SimpleDateFormat fmt = new SimpleDateFormat("dd/MM/yyyy");
     	Date date = new Date();

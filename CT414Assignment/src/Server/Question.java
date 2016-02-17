@@ -1,4 +1,7 @@
-// Question.java
+//Shane O' Rourke - 12361351
+//Niall Martin - 12301341
+
+//Question.java
 
 package Server;
 
@@ -21,7 +24,7 @@ public interface Question extends Serializable {
 	// Returns the student's answer to the question.
 	public int getStudentAnswer();
 	
-	//sets what the student's answer to the question is
+	// Sets what the student's answer to the question is.
 	public void setStudentAnswer(int answer);
 
 }
