@@ -1,5 +1,6 @@
 package Server;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -14,9 +15,10 @@ public class AssessmentImplementation implements Assessment {
 	private int selectedAnswer;
 	private int studentId;
 	private boolean completionStatus;
+	private String dateCompleted;
 	
 	//constructor
-	public AssessmentImplementation(int assessmentCode, String assessmentInfo,Date closingDate, List<Question> questionList, int studentId, boolean completionStatus)
+	public AssessmentImplementation(int assessmentCode, String assessmentInfo,Date closingDate, List<Question> questionList, int studentId, boolean completionStatus, String dateCompleted)
 	{
 		this.assessmentCode = assessmentCode;
 		this.assessmentInfo = assessmentInfo;
@@ -24,6 +26,7 @@ public class AssessmentImplementation implements Assessment {
 		this.questionList = questionList;
 		this.studentId = studentId;
 		this.completionStatus = completionStatus;
+		this.dateCompleted = dateCompleted;
 	}
 	
 	public int getAssessmentCode(){
@@ -100,6 +103,16 @@ public class AssessmentImplementation implements Assessment {
 	
 	public void setCompletionStatus(boolean completionStatus){
 		this.completionStatus = completionStatus;
+	}
+	
+	public String getDateCompleted(){
+		return this.dateCompleted;
+	}
+	
+	public void setDateCompleted(){
+    	SimpleDateFormat fmt = new SimpleDateFormat("dd/MM/yyyy");
+    	Date date = new Date();
+		this.dateCompleted = fmt.format(date);
 	}
 
 }

@@ -40,6 +40,10 @@ public interface Assessment extends Serializable {
 	public boolean getCompletionStatus();
 	
 	public void setCompletionStatus(boolean completionStatus);
+	
+	public String getDateCompleted();
+	
+	public void setDateCompleted();
 
 }
 

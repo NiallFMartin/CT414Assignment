@@ -55,15 +55,16 @@ public class ExamEngine implements ExamServer {
     	qList3.add(q6);
     	
     	//create dates
-    	SimpleDateFormat fmt = new SimpleDateFormat("dd/mm/yyyy");    	
+    	SimpleDateFormat fmt = new SimpleDateFormat("dd/MM/yyyy");    	
     	Date d1 = fmt.parse("10/03/2016");
     	Date d2 = fmt.parse("20/02/2016");
     	Date d3 = fmt.parse("25/02/2016");
+    	String uncompleted = "01/01/1990";
     	
     	//create assessments		
-    	Assessment assessment1 = new AssessmentImplementation(1, "CT414 - Mountains Assignment",d1 , qList1, 123, false);
-    	Assessment assessment2 = new AssessmentImplementation(2, "CT450 - Rivers Assignment",d2 , qList2, 456, false);
-    	Assessment assessment3 = new AssessmentImplementation(3, "CT425 - Countries Assignment",d3 , qList3, 789, false);
+    	Assessment assessment1 = new AssessmentImplementation(1, "CT414 - Mountains Assignment",d1 , qList1, 123, false, uncompleted);
+    	Assessment assessment2 = new AssessmentImplementation(2, "CT450 - Rivers Assignment",d2 , qList2, 456, false, uncompleted);
+    	Assessment assessment3 = new AssessmentImplementation(3, "CT425 - Countries Assignment",d3 , qList3, 789, false, uncompleted);
     	
     	assessments.add(assessment1);
     	assessments.add(assessment2);
@@ -142,11 +143,24 @@ public class ExamEngine implements ExamServer {
     	if (token == 1) {
     		for (Assessment a : assessments) {
     			if ((a.getAssessmentCode() == completed.getAssessmentCode()) && (a.getStudentID() == completed.getStudentID())){
-    				a = completed;
+    				int index = assessments.indexOf(a);
+    				assessments.set(index, completed);
+    				
+    				completedAssessments.add(completed);
     				return true;
     			} else {
     				System.out.println("Unknown Assignment.\n\n");
     		    	return false;
+    			}
+    		}
+    		
+    		for (Assessment a : completedAssessments){
+    			if ((a.getAssessmentCode() == completed.getAssessmentCode()) && (a.getStudentID() == completed.getStudentID())){
+    				int index = assessments.indexOf(a);
+    				assessments.set(index, completed);
+    			} else {
+    				System.out.println("Added Completed Assignment.\n\n");
+    				completedAssessments.add(completed);
     			}
     		}
     	}

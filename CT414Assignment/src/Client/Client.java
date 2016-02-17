@@ -68,6 +68,10 @@ public class Client {
 		}
 		else if(choice == 3)
 		{
+			//viewResults(studentID);
+		}
+		else if(choice == 4)
+		{
 			System.exit(0);
 		}
 		else
@@ -150,6 +154,7 @@ public class Client {
 		}
 		
 		assessmentToComplete.setCompletionStatus(true);
+		assessmentToComplete.setDateCompleted();
 		boolean submit = this.server.submitAssessment(1, studentID, assessmentToComplete);
 		
 		if(submit){
@@ -158,4 +163,9 @@ public class Client {
 				
 		mainMenu(studentID);
 	}
+	
+//	public void viewResults(int studentID){
+//		this.server.assessments
+//		
+//	}
 }
