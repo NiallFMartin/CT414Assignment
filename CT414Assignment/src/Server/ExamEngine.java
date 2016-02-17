@@ -112,7 +112,7 @@ public class ExamEngine implements ExamServer {
     	if (token == 1){
     		for (Assessment a : assessments){
     			if (a.getStudentID() == studentid){
-    				summaries.add(a.getInformation());
+    				summaries.add("Assessment ID: "+a.getAssessmentCode()+"\n"+a.getInformation() + "\nCompleted: " + a.getCompletionStatus());
     			}
     		}
     		return summaries;
@@ -122,34 +122,36 @@ public class ExamEngine implements ExamServer {
     }
 
     // Return an Assessment object associated with a particular course code
-    public Assessment getAssessment(int token, int studentid, int courseCode) throws
+    public Assessment getAssessment(int token, int studentid, int assessmentCode) throws
                 UnauthorizedAccess, NoMatchingAssessment, RemoteException {
 
     	if (token == 1){
     		for (Assessment a : assessments){
-    			if ((a.getStudentID() == studentid) && (a.getCourseCode() == courseCode)){
+    			if ((a.getStudentID() == studentid) && (a.getAssessmentCode() == assessmentCode)){
     				return a;
     			}
     		}
     	}
         return null;
     }
-//
-//    // Submit a completed assessment
-//    public void submitAssessment(int token, int studentid, Assessment completed) throws 
-//                UnauthorizedAccess, NoMatchingAssessment, RemoteException {
-//    		
-//    	if (token == 1) {
-//    		for (Assessment a : completedAssessments) {
-//    			if ((a.getCourseCode() == completed.getCourseCode()) && (a.getStudentID() == completed.getStudentID())){
-//    				a = completed;
-//    			} else {
-//    				completedAssessments.add(completed);
-//    			}
-//    		}
-//    	}
-//    
-//    }
+
+    // Submit a completed assessment
+    public boolean submitAssessment(int token, int studentid, Assessment completed) throws 
+                UnauthorizedAccess, NoMatchingAssessment, RemoteException {
+    		
+    	if (token == 1) {
+    		for (Assessment a : assessments) {
+    			if ((a.getAssessmentCode() == completed.getAssessmentCode()) && (a.getStudentID() == completed.getStudentID())){
+    				a = completed;
+    				return true;
+    			} else {
+    				System.out.println("Unknown Assignment.\n\n");
+    		    	return false;
+    			}
+    		}
+    	}
+		return false;    
+    }
 
     public static void main(String[] args) {
         if (System.getSecurityManager() == null) {

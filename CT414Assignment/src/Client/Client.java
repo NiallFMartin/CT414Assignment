@@ -12,6 +12,7 @@ import java.util.Scanner;
 import Server.Assessment;
 import Server.ExamServer;
 import Server.NoMatchingAssessment;
+import Server.Question;
 import Server.UnauthorizedAccess;
 
 public class Client {
@@ -91,12 +92,8 @@ public class Client {
 			if (this.server.login(studentID, password) == 1){
 				token = 1;
 				System.out.println("\nYou are now logged in :)");
-//				System.out.println("Here is the list of course that are available to you: \n");
+				
 				this.server.createObjects();
-//
-//				for (Assessment a : assess){
-//					System.out.println("Course Code: "+a.getInformation());
-//				}
 				mainMenu(studentID);
 				
 			} 
@@ -121,8 +118,9 @@ public class Client {
 		System.out.println("Here is the list of course that are available to you: \n");
 		summaries = this.server.getAvailableSummary(1, studentID);
 		
+		System.out.println("ASSESSMENTS\n");
 		for (String s : summaries){
-			System.out.println("CC: "+s);
+			System.out.println(s);
 		}
 		
 		mainMenu(studentID);
@@ -130,8 +128,34 @@ public class Client {
 	
 	public void completeAssessment(int studentID) throws RemoteException, UnauthorizedAccess, NoMatchingAssessment
 	{
-		System.out.println("\ncomplete assessment test\n");
+		System.out.println("\nTry and complete assessment test\n");
+		Scanner in = new Scanner(System.in);
 		
+		System.out.print("Enter Course Code for Assessment you wish to complete: ");
+		int cc = in.nextInt();
+		
+		Assessment assessmentToComplete = this.server.getAssessment(1, studentID, cc);
+		List<Question> questions = new ArrayList<Question>();
+		questions = assessmentToComplete.getQuestions();
+		
+		for(Question q : questions){
+			System.out.println("Q" + q.getQuestionNumber() + " - " + q.getQuestionDetail());
+			for(String s : q.getAnswerOptions()){
+				System.out.println(s);
+			}
+			System.out.print("Your answer: ");
+			int studentAnswer = in.nextInt();
+			
+			q.setStudentAnswer(studentAnswer);
+		}
+		
+		assessmentToComplete.setCompletionStatus(true);
+		boolean submit = this.server.submitAssessment(1, studentID, assessmentToComplete);
+		
+		if(submit){
+			System.out.print("Assessment completed.\n\n");
+		}
+				
 		mainMenu(studentID);
 	}
 }

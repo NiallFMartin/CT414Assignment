@@ -21,13 +21,13 @@ public interface ExamServer extends Remote {
 	public List<String> getAvailableSummary(int token, int studentid) throws
 		UnauthorizedAccess, NoMatchingAssessment, RemoteException;
 
-//	// Return an Assessment object associated with a particular course code
-//	public Assessment getAssessment(int token, int studentid, int courseCode) throws
-//		UnauthorizedAccess, NoMatchingAssessment, RemoteException;
-//
-//	// Submit a completed assessment
-//	public void submitAssessment(int token, int studentid, Assessment completed) throws 
-//		UnauthorizedAccess, NoMatchingAssessment, RemoteException;
+	// Return an Assessment object associated with a particular course code
+	public Assessment getAssessment(int token, int studentid, int courseCode) throws
+		UnauthorizedAccess, NoMatchingAssessment, RemoteException;
+
+	// Submit a completed assessment
+	public boolean submitAssessment(int token, int studentid, Assessment completed) throws 
+		UnauthorizedAccess, NoMatchingAssessment, RemoteException;
 
 }
 

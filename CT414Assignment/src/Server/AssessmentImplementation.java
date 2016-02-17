@@ -5,7 +5,7 @@ import java.util.List;
 
 public class AssessmentImplementation implements Assessment {
 
-	private int courseCode;
+	private int assessmentCode;
 	private String assessmentInfo;
 	private Date closingDate;
 	private List<Question> questionList;
@@ -16,9 +16,9 @@ public class AssessmentImplementation implements Assessment {
 	private boolean completionStatus;
 	
 	//constructor
-	public AssessmentImplementation(int courseCode, String assessmentInfo,Date closingDate, List<Question> questionList, int studentId, boolean completionStatus)
+	public AssessmentImplementation(int assessmentCode, String assessmentInfo,Date closingDate, List<Question> questionList, int studentId, boolean completionStatus)
 	{
-		this.courseCode = courseCode;
+		this.assessmentCode = assessmentCode;
 		this.assessmentInfo = assessmentInfo;
 		this.closingDate = closingDate;
 		this.questionList = questionList;
@@ -26,13 +26,13 @@ public class AssessmentImplementation implements Assessment {
 		this.completionStatus = completionStatus;
 	}
 	
-	public int getCourseCode(){
-		return this.courseCode;
+	public int getAssessmentCode(){
+		return this.assessmentCode;
 	}
 	
 	public String getInformation() {
 		//course code and assessment name
-		return this.assessmentInfo;
+		return this.assessmentInfo + " Completed: " + this.completionStatus;
 	}
 
 	public Date getClosingDate() {
